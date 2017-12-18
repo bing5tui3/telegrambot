@@ -48,7 +48,7 @@ class Api::V1::UpdatesController < ApplicationController
 	def register_user
 		@user = User.find_or_initialize_by(telegram_id: from['id'])
 		@user.update_attributes!(first_name: from['first_name'], last_name: from['last_name'])
-		@user
+		@user.save
 	end
 
 end
