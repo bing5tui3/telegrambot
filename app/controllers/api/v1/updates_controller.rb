@@ -8,6 +8,8 @@ class Api::V1::UpdatesController < ApplicationController
 		text = message['text']
 		puts text
 
+		user
+
 		case text
 		when "/start" then
 			reply = "Ok, let's start!"
@@ -48,6 +50,7 @@ class Api::V1::UpdatesController < ApplicationController
 	def register_user
 		@user = User.find_or_initialize_by(telegram_id: from['id'])
 		@user.update_attributes!(first_name: from['first_name'], last_name: from['last_name'])
+		puts @user
 		@user.save
 	end
 
