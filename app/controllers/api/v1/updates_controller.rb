@@ -1,26 +1,27 @@
 class Api::V1::UpdatesController < ApplicationController
 	skip_before_action :verify_authenticity_token
 
-	def create
-		puts params
+	# 
+	def dispatch
 		chat_id  = chat['id']
-		puts chat_id
 		text = message['text']
-		puts text
 
 		user
 
-		case text
-		when "/start" then
-			reply = "Ok, let's start!"
-		when "/fuck" then
-			reply = "Fuck you Fat Guy"
-		else
-			reply = "Sorry, I don't understand"
-		end
+		# case text
+		# when "/start" then
+		# 	reply = "Ok, let's start!"
+		# when "/fuck" then
+		# 	reply = "Fuck you Fat Guy"
+		# else
+		# 	reply = "Sorry, I don't understand"
+		# end
+
+		sw = Switch.new(text)
+		reply = sw.get_reply
 
 
-		https_request = Httpsrequests.new
+		https_request = Httpsrequests.new 
 		
 		content = {
 			:chat_id => chat_id,
